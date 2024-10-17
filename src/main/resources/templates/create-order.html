@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Order</title>
+</head>
+<body>
+    <h2>Create a New Order</h2>
+    <form th:action="@{/create-order}" method="post">
+        
+        <!-- Thông tin người gửi -->
+        <div>
+            <label>senderName:</label>
+            <input type="text" name="senderName" required />
+        </div>
+        <div>
+            <label>senderPhone:</label>
+            <input type="text" name="senderPhoneNumber" required />
+        </div>
+        <div>
+            <label>senderAddress:</label>
+            <input type="text" name="senderAddress" required />
+        </div>
+        
+        <!-- Thông tin người nhận -->
+        <div>
+            <label>receiverName:</label>
+            <input type="text" name="receiverName" required />
+        </div>
+        <div>
+            <label>receiverPhone:</label>
+            <input type="text" name="receiverPhoneNumber" required />
+        </div>
+        <div>
+            <label>receiverAddress:</label>
+            <input type="text" name="receiverAddress" required />
+        </div>
+        
+        <!-- Thông tin hàng hóa -->
+        <div>
+            <label>Item Name:</label>
+            <input type="text" name="itemName" required />
+        </div>
+        <div>
+            <label>Item Weight (g):</label>
+            <input type="number" step="100" name="itemWeight" required />
+        </div>
+        <div>
+            <label>Item Count:</label>
+            <input type="number" name="itemCount" required />
+        </div>
+
+        <!-- Chọn đơn vị giao hàng -->
+        <div>
+            <label>distributor</label>
+            <select name="distributor">
+                <option value="1. ">GiaoHangCham</option>
+                <option value="2. ">GiaoHangTonTien</option>
+            </select>
+        </div>
+
+        <!-- Nút tạo đơn -->
+        <button type="submit">Create Order</button>
+    </form>
+</body>
+</html>
