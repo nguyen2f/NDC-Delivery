@@ -65,14 +65,14 @@ public class UserController {
     @PostMapping("/update-user")
     public String updateUser(@ModelAttribute("user") User updatedUser, HttpSession session, Model model) {
         // Lấy thông tin người dùng hiện tại từ session
-        User existingUser = (User) session.getAttribute("loggedInUser");
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
 
         // Cập nhật họ tên và mật khẩu
-        existingUser.setFullName(updatedUser.getFullName());
-        existingUser.setPassword(updatedUser.getPassword());
+        loggedInUser.setFullName(updatedUser.getFullName());
+        loggedInUser.setPassword(updatedUser.getPassword());
 
         // Lưu thông tin mới
-        userService.save(existingUser);
+        userService.save(loggedInUser);
 
         model.addAttribute("message", "User information updated successfully!");
         return "update-user";

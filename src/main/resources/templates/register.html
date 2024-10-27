@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
-  <title>Register</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Ký</title>
 </head>
 <body>
-<h2>Register</h2>
-<form th:action="@{/register}" th:object="${user}" method="post">
+<h2>Đăng Ký</h2>
+<form action="/register" method="post">
   <div>
-    <label>Full Name:</label>
-    <input type="text" th:field="*{fullName}" />
+    <label for="fullName">Họ và tên:</label>
+    <input type="text" id="fullName" name="fullName" required />
   </div>
   <div>
-    <label>Phone Number:</label>
-    <input type="text" th:field="*{phoneNumber}" />
+    <label for="phoneNumber">Số điện thoại:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" required />
   </div>
   <div>
-    <label>Password:</label>
-    <input type="password" th:field="*{password}" />
+    <label for="password">Mật khẩu:</label>
+    <input type="password" id="password" name="password" required />
   </div>
-  <button type="submit">Register</button>
+  <button type="submit">Đăng Ký</button>
 </form>
 </body>
 </html>

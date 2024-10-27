@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update User Information</title>
 </head>
 <body>
 <h2>Update Your Information</h2>
-<form th:action="@{/update-user}" th:object="${user}" method="post">
+<form action="/update-user" method="post">
   <div>
-    <label>Phone Number (cannot be changed):</label>
-    <input type="text" th:field="*{phoneNumber}" readonly="readonly" />
+    <label for="phoneNumber">Phone Number (cannot be changed):</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" readonly="readonly" />
   </div>
   <div>
-    <label>Full Name:</label>
-    <input type="text" th:field="*{fullName}" />
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" required />
   </div>
   <div>
-    <label>Password:</label>
-    <input type="password" th:field="*{password}" />
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
   </div>
   <button type="submit">Update</button>
-  <p th:if="${message}" th:text="${message}" style="color: green;"></p>
+  <p id="message" style="color: green;"></p>
 </form>
+
+
 </body>
 </html>

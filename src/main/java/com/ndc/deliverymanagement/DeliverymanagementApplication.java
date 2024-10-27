@@ -2,18 +2,17 @@ package com.ndc.deliverymanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
-@RestController
+@Controller
 public class DeliverymanagementApplication {
-	@RequestMapping("/")
-	String home() {
-		return "Hello World!";
+	@GetMapping("/")
+	public String home() {
+		return "home";
 	}
 
 	public static void main(String[] args) {

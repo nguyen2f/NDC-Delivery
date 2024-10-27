@@ -1,65 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
-    <title>Create Order</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Đơn Hàng</title>
 </head>
 <body>
-    <h2>Create a New Order</h2>
-    <form th:action="@{/create-order}" method="post">
-        
-        <!-- Thông tin người gửi -->
-        <div>
-            <label>senderName:</label>
-            <input type="text" name="senderName" required />
-        </div>
-        <div>
-            <label>senderPhone:</label>
-            <input type="text" name="senderPhoneNumber" required />
-        </div>
-        <div>
-            <label>senderAddress:</label>
-            <input type="text" name="senderAddress" required />
-        </div>
-        
-        <!-- Thông tin người nhận -->
-        <div>
-            <label>receiverName:</label>
-            <input type="text" name="receiverName" required />
-        </div>
-        <div>
-            <label>receiverPhone:</label>
-            <input type="text" name="receiverPhoneNumber" required />
-        </div>
-        <div>
-            <label>receiverAddress:</label>
-            <input type="text" name="receiverAddress" required />
-        </div>
-        
-        <!-- Thông tin hàng hóa -->
-        <div>
-            <label>Item Name:</label>
-            <input type="text" name="itemName" required />
-        </div>
-        <div>
-            <label>Item Weight (g):</label>
-            <input type="number" step="100" name="itemWeight" required />
-        </div>
-        <div>
-            <label>Item Count:</label>
-            <input type="number" name="itemCount" required />
-        </div>
+<h2>Tạo Đơn Hàng Mới</h2>
+<form action="/create-order" method="post">
 
-        <!-- Chọn đơn vị giao hàng -->
-        <div>
-            <label>distributor</label>
-            <select name="distributor">
-                <option value="1. ">GiaoHangCham</option>
-                <option value="2. ">GiaoHangTonTien</option>
-            </select>
-        </div>
+    <!-- Thông tin người gửi -->
+    <div>
+        <label for="senderName">Họ và tên người gửi:</label>
+        <input type="text" id="senderName" name="senderName" required />
+    </div>
+    <div>
+        <label for="senderPhoneNumber">Số điện thoại người gửi:</label>
+        <input type="text" id="senderPhoneNumber" name="senderPhoneNumber" required />
+    </div>
+    <div>
+        <label for="senderAddress">Địa chỉ người gửi:</label>
+        <input type="text" id="senderAddress" name="senderAddress" required />
+    </div>
 
-        <!-- Nút tạo đơn -->
-        <button type="submit">Create Order</button>
-    </form>
+    <!-- Thông tin người nhận -->
+    <div>
+        <label for="receiverName">Họ và tên người nhận:</label>
+        <input type="text" id="receiverName" name="receiverName" required />
+    </div>
+    <div>
+        <label for="receiverPhoneNumber">Số điện thoại người nhận:</label>
+        <input type="text" id="receiverPhoneNumber" name="receiverPhoneNumber" required />
+    </div>
+    <div>
+        <label for="receiverAddress">Địa chỉ người nhận:</label>
+        <input type="text" id="receiverAddress" name="receiverAddress" required />
+    </div>
+
+    <!-- Thông tin hàng hóa -->
+    <div>
+        <label for="itemName">Tên hàng hóa:</label>
+        <input type="text" id="itemName" name="itemName" required />
+    </div>
+    <div>
+        <label for="itemWeight">Trọng lượng hàng hóa (g):</label>
+        <input type="number" step="100" id="itemWeight" name="itemWeight" required />
+    </div>
+    <div>
+        <label for="itemCount">Số lượng hàng hóa:</label>
+        <input type="number" id="itemCount" name="itemCount" required />
+    </div>
+
+    <!-- Chọn đơn vị giao hàng -->
+    <div>
+        <label for="distributor">Đơn vị giao hàng:</label>
+        <select id="distributor" name="distributor">
+            <option value="1">GiaoHangCham</option>
+            <option value="2">GiaoHangTonTien</option>
+        </select>
+    </div>
+
+    <!-- Nút tạo đơn -->
+    <button type="submit">Tạo Đơn Hàng</button>
+</form>
 </body>
 </html>

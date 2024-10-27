@@ -1,5 +1,6 @@
 package com.ndc.deliverymanagement.controller;
 
+import com.ndc.deliverymanagement.repository.OrderRepository;
 import com.ndc.deliverymanagement.service.OrderService;
 import com.ndc.deliverymanagement.model.Order;
 import com.ndc.deliverymanagement.model.User;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class OrderController {
@@ -44,7 +46,6 @@ public class OrderController {
         if (loggedInUser == null) {
             return "redirect:/login";
         }
-
         Order newOrder = new Order();
         newOrder.setSenderName(senderName);
         newOrder.setSenderPhoneNumber(senderPhoneNumber);
@@ -63,5 +64,33 @@ public class OrderController {
         model.addAttribute("message", "Order created successfully!");
         return "create-order";
     }
+    @GetMapping("/manage-order")
+    public String manageOrderOptions() {
+        return "manage-order";  // Trang hiển thị các lựa chọn: Đơn nhận và Đơn gửi
+    }
+    @GetMapping("/manage-order/sent")
+    public String showSentOrders(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
 
+        List<Order> sentOrders = orderService.findOrdersBySenderPhone(loggedInUser.getPhoneNumber());
+        model.addAttribute("orders", sentOrders);
+        model.addAttribute("orderType", "sent");
+        return "list-order";
+    }
+
+    @GetMapping("/manage-order/received")
+    public String showReceivedOrders(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        List<Order> receivedOrders = orderService.findOrdersByRecipientPhone(loggedInUser.getPhoneNumber());
+        model.addAttribute("orders", receivedOrders);
+        model.addAttribute("orderType", "received");
+        return "list-order";
+    }
 }
