@@ -23,6 +23,9 @@ public class OrderService {
     public List<Order> findOrdersByRecipientPhone(String phoneNumber) {
         return orderRepository.findByReceiverPhoneNumber(phoneNumber);
     }
+ ///   public List<Order> findOrderByShipperNumber(String phoneNumber) {
+ ///      return orderRepository.findByShipperNumber(phoneNumber);
+ ///  }
 
 
 }

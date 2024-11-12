@@ -93,4 +93,15 @@ public class OrderController {
         model.addAttribute("orderType", "received");
         return "list-order";
     }
+/*
+    @GetMapping("/ship-order")
+    public String updateOrder(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+        List<Order> shipOrder = orderService.
+    }
+
+ */
 }

@@ -1,5 +1,6 @@
 package com.ndc.deliverymanagement.controller;
 
+import com.ndc.deliverymanagement.model.Order;
 import com.ndc.deliverymanagement.model.User;
 import com.ndc.deliverymanagement.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -33,7 +34,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam String phoneNumber, @RequestParam String password, HttpSession session, Model model) {
+    public String loginUser(@RequestParam String phoneNumber,
+                            @RequestParam String password, HttpSession session, Model model) {
         if (userService.checkLogin(phoneNumber, password)) {
             // Lưu thông tin người dùng vào session sau khi đăng nhập thành công
             session.setAttribute("loggedInUser", userService.findByPhoneNumber(phoneNumber));
@@ -77,4 +79,10 @@ public class UserController {
         model.addAttribute("message", "User information updated successfully!");
         return "update-user";
     }
+/*
+    @PutMapping("/ship-order")
+    public String updateOrder(@ModelAttribute("user") User updateOrder, HttpSession session, Model model) {
+
+        return "update-order";
+    }*/
 }
