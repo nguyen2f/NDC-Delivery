@@ -13,19 +13,35 @@ public class OrderService {
     @Autowired
     public OrderRepository orderRepository;
 
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     public Order save(Order order) {
         return orderRepository.save(order);
     }
-    public List<Order> findOrdersBySenderPhone(String phoneNumber) {
+    public List<Order> findOrdersBySenderPhoneNumber(String phoneNumber) {
         return orderRepository.findBySenderPhoneNumber(phoneNumber);
     }
-
-    public List<Order> findOrdersByRecipientPhone(String phoneNumber) {
+    public List<Order> findOrdersByReceiverPhoneNumber(String phoneNumber) {
         return orderRepository.findByReceiverPhoneNumber(phoneNumber);
     }
- ///   public List<Order> findOrderByShipperNumber(String phoneNumber) {
- ///      return orderRepository.findByShipperNumber(phoneNumber);
- ///  }
+/*  public List<Order> findOrderByShipperNumber(String phoneNumber) {
+        return orderRepository.findByShipperPhoneNumber(phoneNumber);
+     }
+*/
+    public List<Order> findByDistributor(String distributor) {
+        return orderRepository.findByDistributor(distributor);
+    }
 
+
+
+    public List<Order> getOrdersBySender(String senderPhoneNumber) {
+        return orderRepository.findBySenderPhoneNumber(senderPhoneNumber);
+    }
+
+    public List<Order> getOrdersByReceiver(String receiverPhoneNumber) {
+        return orderRepository.findByReceiverPhoneNumber(receiverPhoneNumber);
+    }
 
 }

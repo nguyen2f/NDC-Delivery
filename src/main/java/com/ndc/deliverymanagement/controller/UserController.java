@@ -5,84 +5,69 @@ import com.ndc.deliverymanagement.model.User;
 import com.ndc.deliverymanagement.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/api/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
-    // Trang đăng ký
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
-    }
-
+    // API đăng ký người dùng
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user) {
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
         userService.save(user);
-        return "redirect:/login";
+        return ResponseEntity.ok("User registered successfully.");
     }
 
-    // Trang đăng nhập
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
-    }
-
+    // API đăng nhập
     @PostMapping("/login")
-    public String loginUser(@RequestParam String phoneNumber,
-                            @RequestParam String password, HttpSession session, Model model) {
+    public ResponseEntity<?> loginUser(@RequestParam String phoneNumber,
+                                       @RequestParam String password, HttpSession session) {
         if (userService.checkLogin(phoneNumber, password)) {
-            // Lưu thông tin người dùng vào session sau khi đăng nhập thành công
-            session.setAttribute("loggedInUser", userService.findByPhoneNumber(phoneNumber));
-            return "redirect:/home";  // Đăng nhập thành công
+            // Lưu thông tin người dùng vào session
+            User loggedInUser = userService.findByPhoneNumber(phoneNumber);
+            session.setAttribute("loggedInUser", loggedInUser);
+            return ResponseEntity.ok(loggedInUser);
         } else {
-            model.addAttribute("error", "Invalid phone number or password");
-            return "login";  // Đăng nhập thất bại
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid phone number or password.");
         }
     }
 
-    // Trang home
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
-
-    // Trang cập nhật thông tin người dùng
-    @GetMapping("/update-user")
-    public String showUpdateUserForm(HttpSession session, Model model) {
-        // Lấy thông tin người dùng từ session
+    // API lấy thông tin người dùng đã đăng nhập
+    @GetMapping("/me")
+    public ResponseEntity<?> getLoggedInUser(HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
-            model.addAttribute("user", loggedInUser);
-            return "update-user";  // Hiển thị trang cập nhật thông tin
+            return ResponseEntity.ok(loggedInUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user is logged in.");
         }
-        return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
     }
 
-    @PostMapping("/update-user")
-    public String updateUser(@ModelAttribute("user") User updatedUser, HttpSession session, Model model) {
-        // Lấy thông tin người dùng hiện tại từ session
+    // API cập nhật thông tin người dùng
+    @PutMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User updatedUser, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
-
-        // Cập nhật họ tên và mật khẩu
-        loggedInUser.setFullName(updatedUser.getFullName());
-        loggedInUser.setPassword(updatedUser.getPassword());
-
-        // Lưu thông tin mới
-        userService.save(loggedInUser);
-
-        model.addAttribute("message", "User information updated successfully!");
-        return "update-user";
+        if (loggedInUser != null) {
+            loggedInUser.setFullName(updatedUser.getFullName());
+            loggedInUser.setPassword(updatedUser.getPassword());
+            userService.save(loggedInUser);
+            return ResponseEntity.ok("User information updated successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user is logged in.");
+        }
     }
-/*
-    @PutMapping("/ship-order")
-    public String updateOrder(@ModelAttribute("user") User updateOrder, HttpSession session, Model model) {
 
-        return "update-order";
-    }*/
+    // API đăng xuất
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.ok("User logged out successfully.");
+    }
 }

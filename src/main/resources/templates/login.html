@@ -4,27 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
+    <style>
+        /* Basic Reset */
+        body, h2, form, div, label, input, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            padding: 40px;
+        }
+
+        /* Container for the form */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form elements */
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Error message */
+        #error {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 15px;
+            color: red;
+        }
+
+        /* Link to Register */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h2>Đăng Nhập</h2>
-<form action="/login" method="post">
-    <div>
-        <label for="phoneNumber">Số điện thoại:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required />
-    </div>
-    <div>
-        <label for="password">Mật khẩu:</label>
-        <input type="password" id="password" name="password" required />
-    </div>
-    <button type="submit">Đăng Nhập</button>
-    <p id="error" style="color: red; display: none;"></p>
-</form>
-<a href="/register">Bạn chưa có tài khoản? Đăng ký ở đây.</a>
+
+<div class="container">
+    <h2>Đăng Nhập</h2>
+    <form action="/login" method="post">
+        <div>
+            <label for="phoneNumber">Số điện thoại:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required />
+        </div>
+        <div>
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Đăng Nhập</button>
+        <p id="error" style="display: none;"></p>
+    </form>
+    <a href="/register">Bạn chưa có tài khoản? Đăng ký ở đây.</a>
+</div>
 
 <script>
     // Giả sử bạn có một biến JavaScript để kiểm tra lỗi
     const errorMessage = ""; // Thay bằng thông báo lỗi thực tế nếu có
     const errorElement = document.getElementById('error');
+
+    // Nếu có lỗi, hiển thị thông báo lỗi
     if (errorMessage) {
         errorElement.textContent = errorMessage;
         errorElement.style.display = 'block';

@@ -9,4 +9,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findBySenderPhoneNumber(String senderPhoneNumber);
     List<Order> findByReceiverPhoneNumber(String receiverPhoneNumber);
 ///    List<Order> findByShipperPhoneNumber(String shipperPhoneNumber);
+    List<Order> findByDistributor(String distributor);
 }

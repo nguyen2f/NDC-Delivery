@@ -4,23 +4,118 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đăng Ký</title>
+  <style>
+    /* Basic Reset */
+    body, h2, form, div, label, input, button {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        padding: 40px;
+    }
+
+    /* Container for the form */
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Form elements */
+    div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    /* Button */
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    /* Link to Login */
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        .container {
+            padding: 15px;
+        }
+
+        button {
+            font-size: 14px;
+        }
+    }
+  </style>
 </head>
 <body>
-<h2>Đăng Ký</h2>
-<form action="/register" method="post">
-  <div>
-    <label for="fullName">Họ và tên:</label>
-    <input type="text" id="fullName" name="fullName" required />
-  </div>
-  <div>
-    <label for="phoneNumber">Số điện thoại:</label>
-    <input type="text" id="phoneNumber" name="phoneNumber" required />
-  </div>
-  <div>
-    <label for="password">Mật khẩu:</label>
-    <input type="password" id="password" name="password" required />
-  </div>
-  <button type="submit">Đăng Ký</button>
-</form>
+
+<div class="container">
+  <h2>Đăng Ký</h2>
+  <form action="/register" method="post">
+    <div>
+      <label for="fullName">Họ và tên:</label>
+      <input type="text" id="fullName" name="fullName" required />
+    </div>
+    <div>
+      <label for="phoneNumber">Số điện thoại:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" required />
+    </div>
+    <div>
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+    <button type="submit">Đăng Ký</button>
+  </form>
+  <a href="/login">Bạn đã có tài khoản? Đăng nhập ở đây.</a>
+</div>
+
 </body>
 </html>
