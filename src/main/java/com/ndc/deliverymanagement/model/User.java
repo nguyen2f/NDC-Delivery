@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
+@Data
 @Entity
 public class User {
     @Id
@@ -61,4 +63,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

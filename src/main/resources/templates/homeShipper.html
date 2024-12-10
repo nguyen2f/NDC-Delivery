@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Trang chủ Shipper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="wrapper d-flex align-items-stretch">
+      <!-- Sidebar -->
+      <nav id="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="Logo">
+        </div>
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+          </button>
+        </div>
+        <div class="p-4 pt-5">
+          <h1><a href="#" class="logo">Menu</a></h1>
+          <ul class="list-unstyled components mb-5">
+            <li><a href="homeShipper.html">Trang chủ</a></li>
+            <li>
+                <a href="#taskSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý công việc</a>
+                <ul class="collapse list-unstyled" id="taskSubmenu">
+                  <li><a href="#">Xem công việc được giao</a></li>
+                  <li><a href="#">Cập nhật trạng thái giao hàng</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tài khoản</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <li><a href="#">Cập nhật thông tin</a></li>
+                  <li><a href="#">Đổi mật khẩu</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#onSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Trạng thái hoạt động</a>
+                <ul class="collapse list-unstyled" id="onSubmenu">
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </ul>
+              </li>
+              <li>
+                <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Hỗ trợ, trợ giúp</a>
+                <ul class="collapse list-unstyled" id="helpSubmenu">
+                  <li><a href="#">Câu hỏi thường gặp</a></li>
+                  <li><a href="#">Liên hệ hỗ trợ</a></li>
+                </ul>
+              </li>
+              <li><a href="#" onclick="logout()">Đăng xuất</a></li>
+          </ul>
+          <div class="footer">
+            <p>
+              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://fb.com/tendou2508" target="_blank">Đức Cảnh</a>
+            </p>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">NDC Delivery Management - Shipper</h2>
+        <hr>
+        <p>Chào mừng đến với trang dành cho shipper của hệ thống quản lý giao hàng nhanh nhất Việt Nam. Ở đây, bạn có thể xem và quản lý các công việc giao hàng được giao.</p>
+        <div class="task-box mb-5 p-4">
+          <h3 class="h6 mb-4" style="font-size: 25px; font-weight: 700; color: #333; text-transform: uppercase">Tìm kiếm công việc</h3>
+          <form action="#" style="font-size: 14px">
+            <div class="form-group">
+              <label for="orderID">Mã đơn hàng *</label>
+              <input type="text" id="orderID" class="form-control" placeholder="Nhập mã đơn hàng" required>
+            </div>
+            <div class="form-group">
+              <label for="assignedDate">Ngày giao *</label>
+              <input type="date" id="assignedDate" class="form-control" placeholder="Chọn ngày giao hàng" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+          </form>
+        </div>
+        <div class="status-update mb-5 p-4">
+          <h3 class="h6 mb-4" style="font-size: 25px; font-weight: 700; color: #333; text-transform: uppercase">Cập nhật trạng thái đơn hàng</h3>
+          <form action="#" style="font-size: 14px">
+            <div class="form-group">
+              <label for="orderIDUpdate">Mã đơn hàng *</label>
+              <input type="text" id="orderIDUpdate" class="form-control" placeholder="Nhập mã đơn hàng" required>
+            </div>
+            <div class="form-group">
+              <label for="status">Trạng thái mới *</label>
+              <select id="status" class="form-control" required>
+                <option value="">Chọn trạng thái</option>
+                <option value="Đang giao">Đang giao</option>
+                <option value="Đã giao">Đã giao</option>
+                <option value="Không giao được">Không giao được</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Cập nhật</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Trang chủ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+        </div>
+        <div class="p-4 pt-5">
+            <h1><a href="#" class="logo">Menu</a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li><a href="homeCustomer.html">Trang chủ</a></li>
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tài khoản</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li><a href="#">Cập nhật thông tin</a></li>
+                        <li><a href="#">Đổi mật khẩu</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý đơn hàng</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="#order-form">Tạo đơn hàng</a></li>
+                        <li><a href="#">Theo dõi đơn hàng</a></li>
+                        <li><a href="#">Lịch sử mua hàng</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Hỗ trợ, trợ giúp</a>
+                    <ul class="collapse list-unstyled" id="helpSubmenu">
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="logout()">Đăng xuất</a></li>
+            </ul>
+            <div class="footer">
+                <p>
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://fb.com/tendou2508" target="_blank">Đức Cảnh</a>
+                </p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">NDC Delivery Management</h2>
+        <hr>
+        <p>Xin chào đến với trang web hệ thống quản lý giao hàng nhanh nhất Việt Nam. Dự án được thực hiện bởi 3 sinh viên đó là: Nguyễn Đức Cảnh, Hoàng Tiến Đạt, Nguyễn Phúc Nguyên.</p>
+        <div class="search-box mb-5 p-4">
+            <h3 class="h6 mb-4" style="font-size: 25px; font-weight: 700; color: #333; text-transform: uppercase">Tìm kiếm đơn hàng</h3>
+            <form action="#" style="font-size: 14px">
+                <div class="form-group">
+                    <label for="orderID">Mã đơn hàng *</label>
+                    <input type="text" id="orderID" class="form-control" placeholder="Nhập mã đơn hàng" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

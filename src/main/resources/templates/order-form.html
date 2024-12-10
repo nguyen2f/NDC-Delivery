@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create Order</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Create Order</h1>
+  <form th:action="@{/create-order}" method="post" th:object="${order}">
+    <div class="field">
+      <label class="label">Sender Name</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{senderName}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Sender Phone Number</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{senderPhoneNumber}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Sender Address</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{senderAddress}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Receiver Name</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{receiverName}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Receiver Phone Number</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{receiverPhoneNumber}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Receiver Address</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{receiverAddress}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Order Name</label>
+      <div class="control">
+        <input class="input" type="text" th:field="*{orderName}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Order Weight</label>
+      <div class="control">
+        <input class="input" type="number" th:field="*{orderWeight}" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Order Quantity</label>
+      <div class="control">
+        <input class="input" type="number" th:field="*{orderQuantity}" required>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-primary" type="submit">Create Order</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

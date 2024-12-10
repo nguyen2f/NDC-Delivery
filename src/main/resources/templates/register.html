@@ -1,121 +1,161 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng Ký</title>
-  <style>
-    /* Basic Reset */
-    body, h2, form, div, label, input, button {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    /* Body Styling */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fc;
-        padding: 40px;
-    }
-
-    /* Container for the form */
-    .container {
-        max-width: 500px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Title */
-    h2 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    /* Form elements */
-    div {
-        margin-bottom: 15px;
-    }
-
-    label {
-        font-size: 14px;
-        color: #555;
-        margin-bottom: 5px;
-        display: block;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-    }
-
-    /* Button */
-    button {
-        width: 100%;
-        padding: 12px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #45a049;
-    }
-
-    /* Link to Login */
-    a {
-        display: block;
-        text-align: center;
-        margin-top: 15px;
-        font-size: 14px;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-        .container {
-            padding: 15px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        button {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .register-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .register-container label {
+            font-size: 14px;
+            color: black;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container button {
+            width: 100%;
+            background-color: #da2733;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .register-container button:hover {
+            background-color: #c1212d;
+        }
+
+        .register-container .register-link {
+            text-align: center;
+            display: block;
+            margin-top: 20px;
             font-size: 14px;
         }
-    }
-  </style>
+
+        .register-container .register-link a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .register-container .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .register-container {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .register-container h2 {
+                font-size: 20px;
+            }
+
+            .register-container button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .register-container h2 {
+                font-size: 18px;
+            }
+
+            .register-container button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .register-container label {
+                font-size: 12px;
+            }
+
+            .register-container input[type="text"],
+            .register-container input[type="password"] {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .register-container .register-link {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="register-container">
+        <p style="font-size: 20px"><b>Tạo tài khoản mới</b></p>
+        <br>
+        <div style="font-size: 13px; margin-bottom: 15px; font-weight: text-semibold; margin-bottom: 30px">
+            Bạn đã có tài khoản? <a style="color: blue; font-weight: text-semibold" href="login.html">Đăng nhập ngay</a>
+        </div>
+        <form action="#" method="POST">
 
-<div class="container">
-  <h2>Đăng Ký</h2>
-  <form action="/register" method="post">
-    <div>
-      <label for="fullName">Họ và tên:</label>
-      <input type="text" id="fullName" name="fullName" required />
-    </div>
-    <div>
-      <label for="phoneNumber">Số điện thoại:</label>
-      <input type="text" id="phoneNumber" name="phoneNumber" required />
-    </div>
-    <div>
-      <label for="password">Mật khẩu:</label>
-      <input type="password" id="password" name="password" required />
-    </div>
-    <button type="submit">Đăng Ký</button>
-  </form>
-  <a href="/login">Bạn đã có tài khoản? Đăng nhập ở đây.</a>
-</div>
+            <label for="password">Họ và tên:</label>
+            <input type="text" id="username" name="username" placeholder="Nhập họ và tên" required>
 
+            <label for="phone">Số điện thoại:</label>
+            <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+
+            <label for="password">Xác nhận mật khẩu:</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+
+            <button type="submit">ĐĂNG KÝ NGAY</button>
+            <p style="color: #39be4f; font-size: 12px; font-weight: 500">Nếu quý khách không đăng ký được thông tin tài khoản, vui lòng liên hệ Chăm sóc khách hàng của NDC (1900 8386) để được hỗ trợ.</p>
+        </form>
+    </div>
 </body>
 </html>

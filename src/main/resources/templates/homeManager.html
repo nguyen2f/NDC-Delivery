@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Trang quản lý</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="wrapper d-flex align-items-stretch">
+      <!-- Sidebar -->
+      <nav id="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="Logo quản lý">
+        </div>
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+          </button>
+        </div>
+        <div class="p-4 pt-5">
+          <h1><a href="#" class="logo">Quản lý</a></h1>
+          <ul class="list-unstyled components mb-5">
+            <li><a href="dashboard.html">Bảng điều khiển</a></li>
+            <li>
+              <a href="#deliverySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý giao hàng</a>
+              <ul class="collapse list-unstyled" id="deliverySubmenu">
+                <li><a href="#">Xem danh sách giao hàng</a></li>
+                <li><a href="#">Phân công nhân viên giao hàng</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#orderSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý đơn hàng</a>
+              <ul class="collapse list-unstyled" id="orderSubmenu">
+                <li><a href="#">Tạo mới đơn hàng</a></li>
+                <li><a href="#">Cập nhật trạng thái đơn hàng</a></li>
+                <li><a href="#">Xem báo cáo đơn hàng</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#employeeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý nhân viên</a>
+              <ul class="collapse list-unstyled" id="employeeSubmenu">
+                <li><a href="#">Danh sách nhân viên</a></li>
+                <li><a href="#">Thêm mới nhân viên</a></li>
+              </ul>
+            </li>
+            <li><a href="#" onclick="logout()">Đăng xuất</a></li>
+          </ul>
+          <div class="footer">
+            <p>
+              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Developed by <a href="https://fb.com/tendou2508" target="_blank">Đức Cảnh</a>
+            </p>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Hệ thống quản lý giao hàng</h2>
+        <hr>
+        <p>Chào mừng bạn đến với trang dành cho người quản lý. Tại đây bạn có thể thực hiện các chức năng quản lý đơn hàng, nhân viên và phân công giao hàng một cách hiệu quả.</p>
+
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      function logout() {
+        alert('Đăng xuất thành công!');
+        window.location.href = 'login.html';
+      }
+    </script>
+  </body>
+</html>
