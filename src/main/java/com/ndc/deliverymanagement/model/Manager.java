@@ -1,10 +1,8 @@
 package com.ndc.deliverymanagement.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Manager extends User{
-    public Manager(String fullName, String phoneNumber, String password) {
-        super(fullName, phoneNumber, password);
-    }
 }

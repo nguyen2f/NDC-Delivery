@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @Controller
 public class DeliverymanagementApplication {
-	@GetMapping("/")
-	public String home() {
-		return "home";
-	}
 
 	public static void main(String[] args) {
 

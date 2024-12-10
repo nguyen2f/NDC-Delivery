@@ -3,10 +3,9 @@ package com.ndc.deliverymanagement.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-enum orderStatus {
-    DELIVERED, PENDING, CANCELED;
-}
 @Entity
 @Table(name = "deliveryOrder")
 public class Order {
@@ -22,14 +21,15 @@ public class Order {
     private String receiverPhoneNumber;
     private String receiverAddress;
 
-    private String itemName;
-    private double itemWeight;
-    private int itemCount;
+    private String pickupShipperPhoneNumber;
+    private String deliverShipperPhoneNumber;
 
-    private LocalDateTime createdDate;
-    private LocalDateTime deliveriedDate;
-    private String distributor;
-    private orderStatus status;
+    private String orderName;
+    private double orderWeight;
+    private int orderQuantity;
+
+    private String currentStatus;
+
 
     public Long getId() {
         return id;
@@ -87,59 +87,51 @@ public class Order {
         this.receiverAddress = receiverAddress;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getPickupShipperPhoneNumber() {
+        return pickupShipperPhoneNumber;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setPickupShipperPhoneNumber(String pickupShipperPhoneNumber) {
+        this.pickupShipperPhoneNumber = pickupShipperPhoneNumber;
     }
 
-    public double getItemWeight() {
-        return itemWeight;
+    public String getDeliverShipperPhoneNumber() {
+        return deliverShipperPhoneNumber;
     }
 
-    public void setItemWeight(double itemWeight) {
-        this.itemWeight = itemWeight;
+    public void setDeliverShipperPhoneNumber(String deliverShipperPhoneNumber) {
+        this.deliverShipperPhoneNumber = deliverShipperPhoneNumber;
     }
 
-    public int getItemCount() {
-        return itemCount;
+    public String getOrderName() {
+        return orderName;
     }
 
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public double getOrderWeight() {
+        return orderWeight;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+    public void setOrderWeight(double orderWeight) {
+        this.orderWeight = orderWeight;
     }
 
-    public LocalDateTime getDeliveriedDate() {
-        return deliveriedDate;
+    public int getOrderQuantity() {
+        return orderQuantity;
     }
 
-    public void setDeliveriedDate(LocalDateTime deliveriedDate) {
-        this.deliveriedDate = deliveriedDate;
+    public void setOrderQuantity(int orderQuantity) {
+        this.orderQuantity = orderQuantity;
     }
 
-    public String getDistributor() {
-        return distributor;
+    public String getCurrentStatus() {
+        return currentStatus;
     }
 
-    public void setDistributor(String distributor) {
-        this.distributor = distributor;
-    }
-
-    public orderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(orderStatus status) {
-        this.status = status;
+    public void setCurrentStatus(String currentStatus) {
+        this.currentStatus = currentStatus;
     }
 }

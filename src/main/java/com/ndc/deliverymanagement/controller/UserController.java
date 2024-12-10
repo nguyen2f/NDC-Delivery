@@ -51,7 +51,7 @@ public class UserController {
     }
 
     // API cập nhật thông tin người dùng
-    @PutMapping("/update")
+    @PutMapping("/update-user")
     public ResponseEntity<String> updateUser(@RequestBody User updatedUser, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
