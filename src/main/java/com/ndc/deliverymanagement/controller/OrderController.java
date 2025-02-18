@@ -3,6 +3,7 @@ package com.ndc.deliverymanagement.controller;
 import com.ndc.deliverymanagement.dto.OrderHistoryDTO;
 import com.ndc.deliverymanagement.dto.UpdateOrderStatusRequest;
 import com.ndc.deliverymanagement.model.*;
+import com.ndc.deliverymanagement.service.AuthService;
 import com.ndc.deliverymanagement.service.OrderService;
 import com.ndc.deliverymanagement.service.UserService;
 import com.ndc.deliverymanagement.util.JwtUtil;
@@ -31,6 +32,8 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authService;
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/statistics")
@@ -55,10 +58,15 @@ public class OrderController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/create-order")
     public ResponseEntity<?> createOrder(@RequestBody Order order,
-                                         @AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails == null) {
-            return ResponseEntity.status(401).body("Unauthorized");
+                                         @RequestHeader("Authorization") String authorizationHeader) {
+        ResponseEntity<User> authResponse = authService.validateAndGetUser(authorizationHeader);
+
+        if (!authResponse.getStatusCode().is2xxSuccessful()) {
+            return ResponseEntity.status(authResponse.getStatusCode()).build();
         }
+
+        User user = authResponse.getBody();
+
         try {
             Order newOrder = new Order();
             newOrder.setSenderName(order.getSenderName());
@@ -87,33 +95,28 @@ public class OrderController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/sent-orders")
     public ResponseEntity<?> getSentOrders(@RequestHeader("Authorization") String authorizationHeader) {
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized"); // Nếu không có token hoặc sai định dạng
-        }
-        String token = authorizationHeader.substring(7); // Lấy token sau "Bearer "
-        String phoneNumber = jwtUtil.extractPhoneNumber(token); // Giải mã token để lấy số điện thoại
-        // Kiểm tra xem người dùng có tồn tại trong hệ thống không
-        Optional<User> optionalUser = userService.findByPhoneNumber(phoneNumber);
-        if (optionalUser.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
-        }
-        User loggedInUser = optionalUser.get(); // Người dùng đã đăng nhập
-        // Lấy danh sách đơn hàng từ cơ sở dữ liệu
-        List<Order> sentOrders = orderService.findOrdersBySenderPhoneNumber(loggedInUser.getPhoneNumber());
-        return ResponseEntity.ok(sentOrders); // Trả về danh sách đơn hàng
-    }
+        ResponseEntity<User> authResponse = authService.validateAndGetUser(authorizationHeader);
 
+        if (!authResponse.getStatusCode().is2xxSuccessful()) {
+            return ResponseEntity.status(authResponse.getStatusCode()).build();
+        }
+
+        User user = authResponse.getBody();
+        List<Order> sentOrders = orderService.findOrdersBySenderPhoneNumber(user.getPhoneNumber());
+        return ResponseEntity.ok(sentOrders);
+    }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/received-orders")
-    public ResponseEntity<?> getReceivedOrders(HttpSession session) {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
+    public ResponseEntity<?> getReceivedOrders(@RequestHeader("Authorization") String authorizationHeader) {
+        ResponseEntity<User> authResponse = authService.validateAndGetUser(authorizationHeader);
 
-        if (loggedInUser == null) {
-            return ResponseEntity.status(401).body("Unauthorized");
+        if (!authResponse.getStatusCode().is2xxSuccessful()) {
+            return ResponseEntity.status(authResponse.getStatusCode()).build();
         }
 
-        List<Order> receivedOrders = orderService.findOrdersByReceiverPhoneNumber(loggedInUser.getPhoneNumber());
+        User user = authResponse.getBody();
+        List<Order> receivedOrders = orderService.findOrdersByReceiverPhoneNumber(user.getPhoneNumber());
         return ResponseEntity.ok(receivedOrders);
     }
     //shipper
