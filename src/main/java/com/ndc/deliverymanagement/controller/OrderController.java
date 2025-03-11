@@ -36,26 +36,6 @@ public class OrderController {
     private AuthService authService;
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/statistics")
-    public ResponseEntity<?> getOrderStatistics(@AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails == null) {
-            return ResponseEntity.status(401).body("Unauthorized");
-        }
-        try {
-            int successOrders = orderService.countOrdersByStatus("THÀNH CÔNG");
-            int failedOrders = orderService.countOrdersByStatus("THẤT BẠI");
-
-            Map<String, Integer> statistics = new HashMap<>();
-            statistics.put("successOrders", successOrders);
-            statistics.put("failedOrders", failedOrders);
-
-            return ResponseEntity.ok(statistics);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to fetch order statistics: " + e.getMessage());
-        }
-    }
-
-    @PreAuthorize("hasRole('USER')")
     @PostMapping("/create-order")
     public ResponseEntity<?> createOrder(@RequestBody Order order,
                                          @RequestHeader("Authorization") String authorizationHeader) {
@@ -66,7 +46,6 @@ public class OrderController {
         }
 
         User user = authResponse.getBody();
-
         try {
             Order newOrder = new Order();
             newOrder.setSenderName(order.getSenderName());
@@ -167,6 +146,26 @@ public class OrderController {
         return ResponseEntity.ok(history);
     }
     //manager
+    // Chưa xử lí
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/statistics")
+    public ResponseEntity<?> getOrderStatistics(@AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(401).body("Unauthorized");
+        }
+        try {
+            int successOrders = orderService.countOrdersByStatus("THÀNH CÔNG");
+            int failedOrders = orderService.countOrdersByStatus("THẤT BẠI");
+
+            Map<String, Integer> statistics = new HashMap<>();
+            statistics.put("successOrders", successOrders);
+            statistics.put("failedOrders", failedOrders);
+
+            return ResponseEntity.ok(statistics);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to fetch order statistics: " + e.getMessage());
+        }
+    }
     @PostMapping("/assign-pickupshipper")
     public ResponseEntity<?> assignPickupShipper(@RequestParam Long orderId, @RequestParam Long shipperId,HttpSession session) {
         Manager loggedInManager = (Manager) session.getAttribute("loggedInManager");

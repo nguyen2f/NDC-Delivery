@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -44,8 +45,11 @@ public class Order {
 
     private double shippingCost;
 
-
     private String currentStatus;
+
+    private String paymentStatus; // SUCCESS, FAILED, PENDING
+    private String transactionId; // Mã giao dịch từ VNPay
+    private Date paymentTime; // Thời gian thanh toán
 
     public double getShippingCost() {
         return shippingCost;
@@ -157,5 +161,29 @@ public class Order {
 
     public void setCurrentStatus(String currentStatus) {
         this.currentStatus = currentStatus;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public Date getPaymentTime() {
+        return paymentTime;
+    }
+
+    public void setPaymentTime(Date paymentTime) {
+        this.paymentTime = paymentTime;
     }
 }

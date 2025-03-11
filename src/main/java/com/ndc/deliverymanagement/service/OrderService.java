@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,14 @@ public class OrderService {
         return orderRepository.save(order);
 
     }
+    public double calculateShippingCost(double orderWeight, int orderQuantity) {
+        // Logic tính chi phí dựa trên trọng lượng, số lượng và địa chỉ
+        double baseCost = 10000; // Chi phí cơ bản
+        double orderWeightCost = orderWeight * 2000; // Chi phí dựa trên trọng lượng (giả sử 1kg = 1000 VNĐ)
+        double orderQuantityCost = orderQuantity * 3500; // Chi phí dựa trên số lượng (giả sử mỗi món hàng thêm 500 VNĐ)
+
+        return baseCost + orderWeightCost + orderQuantityCost;
+    }
     public List<Order> findOrdersBySenderPhoneNumber(String senderPhoneNumber) {
         return orderRepository.findBySenderPhoneNumber(senderPhoneNumber);
     }
@@ -56,6 +65,16 @@ public class OrderService {
     public int countOrdersByStatus(String currentStatus) {
         return orderRepository.countByCurrentStatus(currentStatus);
 
+    }
+
+    public void updatePaymentStatus(Long orderId, String status, String transactionId, Date paymentTime) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng với ID: " + orderId));
+
+        order.setPaymentStatus(status);
+        order.setTransactionId(transactionId);
+        order.setPaymentTime(paymentTime);
+        orderRepository.save(order);
     }
 
     @Transactional
@@ -109,13 +128,6 @@ public class OrderService {
         order.setDeliverShipperPhoneNumber(shipper.getPhoneNumber());
         return orderRepository.save(order);
     }
-    public double calculateShippingCost(double orderWeight, int orderQuantity) {
-        // Logic tính chi phí dựa trên trọng lượng, số lượng và địa chỉ
-        double baseCost = 10000; // Chi phí cơ bản
-        double orderWeightCost = orderWeight * 2000; // Chi phí dựa trên trọng lượng (giả sử 1kg = 1000 VNĐ)
-        double orderQuantityCost = orderQuantity * 3500; // Chi phí dựa trên số lượng (giả sử mỗi món hàng thêm 500 VNĐ)
 
-        return baseCost + orderWeightCost + orderQuantityCost;
-    }
 
 }

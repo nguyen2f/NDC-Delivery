@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @Controller
-public class DeliverymanagementApplication {
+public class  DeliverymanagementApplication {
 
 	public static void main(String[] args) {
 

@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -31,21 +33,28 @@ public class UserController {
 
     // API đăng ký người dùng
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
-        // Kiểm tra xem số điện thoại đã tồn tại chưa
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody UserDTO userDTO) {
+        Map<String, String> response = new HashMap<>();
+
+        // Kiểm tra số điện thoại đã tồn tại chưa
         if (userService.findByPhoneNumber(userDTO.getPhoneNumber()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Phone number already registered.");
+            response.put("error", "Phone number already registered.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        // Kiểm tra mật khẩu có hợp lệ không
+        // Kiểm tra mật khẩu hợp lệ không
         if (userDTO.getPassword() == null || userDTO.getPassword().length() < 6) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password must be at least 6 characters.");
+            response.put("error", "Password must be at least 6 characters.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
         // Đăng ký người dùng
         userService.registerUser(userDTO);
-        return ResponseEntity.ok("User registered successfully.");
+
+        response.put("message", "User registered successfully.");
+        return ResponseEntity.ok(response);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestParam String phoneNumber, @RequestParam String password) {
